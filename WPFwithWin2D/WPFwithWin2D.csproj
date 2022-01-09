@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.XamlHost" Version="6.1.2" />
+    <PackageReference Include="Win2D.uwp" Version="1.26.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UWPGraphics.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UWPGraphics.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
