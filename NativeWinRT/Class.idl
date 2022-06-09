@@ -1,0 +1,8 @@
+namespace NativeWinRT
+{
+    [default_interface]
+    runtimeclass Class
+    {
+        Class();
+    }
+}
