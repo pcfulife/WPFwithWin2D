@@ -1,41 +1,29 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Xaml;
-using Microsoft.Toolkit.Wpf.UI.XamlHost;
 using System;
 using System.Numerics;
+using System.Runtime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
-namespace WPFwithWin2D
+// 빈 페이지 항목 템플릿에 대한 설명은 https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x412에 나와 있습니다.
+
+namespace App1
 {
-    public partial class UWPGraphics
+    /// <summary>
+    /// 자체적으로 사용하거나 프레임 내에서 탐색할 수 있는 빈 페이지입니다.
+    /// </summary>
+    public sealed partial class MainPage : Page
     {
-        public UWPGraphics()
+        public MainPage()
         {
-            InitializeComponent();
-        }
-
-        void WindowsXamlHost_ChildChanged(object sender, EventArgs e)
-        {
-            var viewbox = (sender as WindowsXamlHost).Child as Viewbox;
-            if (viewbox == null)
-            {
-                return;
-            }
-            viewbox.Stretch = Stretch.Fill;
+            this.InitializeComponent();
             var canvasSwapChain = new CanvasSwapChain(CanvasDevice.GetSharedDevice(), 300F, 300F, 96F);
-            var canvasSwapChainPanel = new CanvasSwapChainPanel
-            {
-                Width = 300.0,
-                Height = 300.0,
-                SwapChain = canvasSwapChain
-            };
-            viewbox.Child = canvasSwapChainPanel;
+            MyCanvasSwapChainPanel.SwapChain = canvasSwapChain;
             Task.Run(() =>
             {
+                GCSettings.LatencyMode = GCLatencyMode.LowLatency;
                 while (true)
                 {
                     using (var canvasDrawingSession = canvasSwapChain.CreateDrawingSession(Colors.White))

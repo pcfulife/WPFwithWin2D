@@ -55,7 +55,17 @@
 			threadingModel="both"
 			xmlns="urn:schemas-microsoft-com:winrt.v1" />
 		<activatableClass
+			name="Microsoft.Graphics.Canvas.CanvasDrawingSession"
+			threadingModel="both"
+			xmlns="urn:schemas-microsoft-com:winrt.v1" />
+		<activatableClass
 			name="Microsoft.Graphics.Canvas.UI.Xaml.CanvasSwapChainPanel"
+			threadingModel="both"
+			xmlns="urn:schemas-microsoft-com:winrt.v1" />
+	</file>
+	<file name="Microsoft.WindowsAppRuntime.Bootstrap.dll">
+		<activatableClass
+			name="Microsoft.UI.Colors"
 			threadingModel="both"
 			xmlns="urn:schemas-microsoft-com:winrt.v1" />
 	</file>
