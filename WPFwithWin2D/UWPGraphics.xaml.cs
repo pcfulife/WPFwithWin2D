@@ -41,11 +41,9 @@ namespace WPFwithWin2D
                     using (var canvasDrawingSession = canvasSwapChain.CreateDrawingSession(Colors.White))
                     {
                         canvasDrawingSession.FillRectangle(new Rect(0.0, 0.0, 300.0, 300.0), Colors.Black);
-                        canvasDrawingSession.DrawText(@"UWP (Win2D)
-Graphics with
-Xaml Islands", new Vector2(50F, 50F), Colors.White);
+                        canvasDrawingSession.DrawText(GC.CollectionCount(2).ToString(), new Vector2(50F, 50F), Colors.White);
                     }
-                   canvasSwapChain.Present();
+                    canvasSwapChain.Present(0);
                 }
             });
         }
