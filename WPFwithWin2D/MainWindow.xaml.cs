@@ -1,29 +1,28 @@
-﻿using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
+﻿
+using Microsoft.Graphics.Canvas;
+using System;
+using System.Threading.Tasks;
+using Windows.UI;
 
 namespace WPFwithWin2D
 {
-    public partial class MainWindow : INotifyPropertyChanged
+    public partial class MainWindow
     {
-        public Visibility WPFGraphicsVisibility { get; set; } = Visibility.Visible;
-
-        public Visibility UWPGraphicsVisibility { get; set; } = Visibility.Collapsed;
-
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void Window_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            WPFGraphicsVisibility = WPFGraphicsVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            PropertyChanged(this, new PropertyChangedEventArgs(nameof(WPFGraphicsVisibility)));
-
-            UWPGraphicsVisibility = UWPGraphicsVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            PropertyChanged(this, new PropertyChangedEventArgs(nameof(UWPGraphicsVisibility)));
+            var canvasSwapChain = new CanvasSwapChain(CanvasDevice.GetSharedDevice(), 300F, 300F, 96F);
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    using (var canvasDrawingSession = canvasSwapChain.CreateDrawingSession(Colors.White))
+                    {
+                    }
+                    canvasSwapChain.Present(0);
+                    Console.WriteLine(GC.CollectionCount(0).ToString() + " " + GC.CollectionCount(1).ToString() + " " + GC.CollectionCount(2).ToString());
+                }
+            });
         }
     }
 }
